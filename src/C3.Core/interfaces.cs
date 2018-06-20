@@ -39,7 +39,7 @@ namespace C3.Core
     {
         void InitWorld(IGeometry geometry);
         void StepWorld(IGeometry geometry);
-        void Draw(IC3DrawingSystem system, SKSurface surface);
+        string Draw(IC3DrawingSystem system, SKSurface surface);
     }
 
     

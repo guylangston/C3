@@ -56,13 +56,14 @@ namespace C3.Core.Examples
             }
         }
 
-        public void Draw(IC3DrawingSystem system, SKSurface surface)
+        public string Draw(IC3DrawingSystem system, SKSurface surface)
         {
             surface.Canvas.DrawRect(0,0, system.Width, system.Height, fill);
             foreach (var ball in balls)
             {
                 ball.Draw(this, surface.Canvas);
             }
+            return null;
         }
 
         public enum Shape

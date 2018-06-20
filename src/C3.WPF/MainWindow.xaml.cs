@@ -30,15 +30,32 @@ namespace C3.WPF
         {
             InitializeComponent();
 
-            drawingSystem = new C3DrawingSystemWpfSkiaSharp(new SampleSketch())
+            try
             {
-                UpdateToolbar = (t) => this.toolbar.Text = t
-            };
+                IC3Sketch sketch = GetSketch("Example");
 
-            drawingSystem.Setup((int) this.Width, (int) this.Height, 60);
-            this.image.Source = drawingSystem.GetImageSource();
+                drawingSystem = new C3DrawingSystemWpfSkiaSharp(sketch)
+                {
+                    UpdateToolbar = (t) => this.toolbar.Text = t
+                };
 
-            drawingSystem.Start();
+                drawingSystem.Setup((int)this.Width, (int)this.Height, 60);
+                this.image.Source = drawingSystem.GetImageSource();
+
+                drawingSystem.Start();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), e.GetType().Name);
+                Environment.Exit(-1);
+            }
+          
+        }
+
+        private IC3Sketch GetSketch(string example)
+        {
+            var factory = new SketchFactory();
+            return factory.GetSketch(example);
         }
     }
 }

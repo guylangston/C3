@@ -39,7 +39,8 @@ namespace C3.WPF
 
         public void Draw(SKSurface surface)
         {
-            Sketch.Draw(this, surface);
+            var txt = Sketch.Draw(this, surface);
+            base.UpdateToolbar(txt);
         }
 
        
