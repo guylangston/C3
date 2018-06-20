@@ -72,4 +72,11 @@ namespace C3.Core
         public SKRect this[SKRect rect] => new SKRect(rect.Left + offset.X, rect.Top + offset.Y, rect.Right + offset.X, rect.Bottom + offset.Y);
 
     }
+
+    public static class Helper
+    {
+        public static Random Random = new Random((int)DateTime.Now.Ticks);
+
+        public static T RandomSelect<T>(params Func<T>[] get) => get[Random.Next(0, get.Length)]();
+    }
 }

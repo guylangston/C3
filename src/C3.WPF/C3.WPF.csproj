@@ -106,5 +106,16 @@
       <Version>1.60.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ms-icon-144x144.png" />
+    <Resource Include="ms-icon-150x150.png" />
+    <Resource Include="ms-icon-310x310.png" />
+    <Resource Include="ms-icon-70x70.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="favicon-16x16.png" />
+    <Resource Include="favicon-32x32.png" />
+    <Resource Include="favicon-96x96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

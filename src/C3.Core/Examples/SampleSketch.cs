@@ -11,7 +11,7 @@ namespace C3.Core.Examples
     public class SampleSketch : IC3Sketch
     {
         private Random rnd = new Random();
-        private List<Ball> balls = new List<Ball>();
+        private List<Element> balls = new List<Element>();
         
         SKPaint fill =  new SKPaint()
         {
@@ -22,7 +22,7 @@ namespace C3.Core.Examples
         {
             for (int cc = 0; cc < 100; cc++)
             {
-                balls.Add(new Ball()
+                balls.Add(new Element()
                 {
                     X = rnd.Next(0, geometry.Width),
                     Y = rnd.Next(0, geometry.Height),
@@ -32,9 +32,18 @@ namespace C3.Core.Examples
                     Paint =  new SKPaint()
                     {
                         IsStroke = true,
-                        Color = new SKColor(100, 100, 100, 100),
+                        Color =  Helper.RandomSelect(
+                            () => new SKColor(200, 200, 200, 100),
+                            () => new SKColor(200, 0, 0, 100),
+                            () => new SKColor(0, 200, 0, 100),
+                            () => new SKColor(0, 0, 200, 100)
+                            ),
                         StrokeWidth =  rnd.Next(1, 6)
-                    }
+                    },
+                    Shape = Helper.RandomSelect(
+                            ()=>Shape.Circle,
+                            ()=>Shape.Rect
+                        )
                 });
             }
         }
@@ -56,9 +65,14 @@ namespace C3.Core.Examples
             }
         }
 
+        public enum Shape
+        {
+            Circle,
+            Rect
+        }
 
 
-        class Ball
+        class Element
         {
             public float X { get; set; }
             public float Y { get; set; }
@@ -69,9 +83,19 @@ namespace C3.Core.Examples
 
             public SKPaint Paint { get; set; }
 
+            public Shape Shape { get; set; }
+
             public void Draw(SampleSketch sampleSketch, SKCanvas canvas)
             {
-                canvas.DrawCircle(X, Y, Size, Paint);
+                if (Shape == Shape.Circle)
+                {
+                    canvas.DrawCircle(X, Y, Size, Paint);
+                }
+                else if (Shape == Shape.Rect)
+                {
+                    canvas.DrawRect(X, Y, Size, Size, Paint);
+                }
+                
             }
 
             public void Step(IGeometry sampleSketch)
